@@ -21,6 +21,7 @@ const login = document.querySelector(".login")
 const loginName = document.querySelector(".login__name")
 const loginUserName = document.querySelector(".login__username")
 //  console.log(loginUserName);
+let userData = JSON.parse(localStorage.getItem("users")) || []
 login.addEventListener("submit", (e)=>{
     e.preventDefault()
     let loginame = loginName.value
@@ -58,11 +59,12 @@ form.addEventListener("submit", (event) => {
         password
 
     }
-    USERS.push(mewUser)
-    console.log(USERS);
+    userData.push(mewUser)
+    // console.log(USERS);
     form.reset()
     popupState("none")
-    createCard(USERS)
+    createCard(userData)
+    localStorage.setItem("users", JSON.stringify(userData))
 })
 eyePassword.addEventListener("click", ()=>{
     if(formPassword.type === "text"){
@@ -112,7 +114,7 @@ function createCard(data) {
        wrapper.appendChild(card)
     })
 }
-createCard(USERS)
+createCard(userData)
 
 
 
